@@ -1,23 +1,24 @@
-import logo from './logo.svg';
+import { useState } from 'react'
 import './App.css';
 
 function App() {
+  const [ p1PeicesLeft, setP1PeicesLeft ] = useState(21);
+  const [ p2PeicesLeft, setP2PeicesLeft ] = useState(21);
+  const [ currentPlayer, setPlayer ] = useState(1);
+
+  const peiceDropped = ({ player }) => {
+    if (player == 1) {
+      setP1PeicesLeft(p1PeicesLeft - 1)
+      setPlayer(2)
+    } else {
+      setP2PeicesLeft(p2PeicesLeft - 1)
+      setPlayer(1)
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div onMouseUp={() => peiceDropped({ player: currentPlayer })} className='dropzone'>
+      Drop Zone
     </div>
   );
 }
