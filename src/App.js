@@ -5,6 +5,7 @@ function App() {
   const [ p1PiecesLeft, setP1PiecesLeft ] = useState(21);
   const [ p2PiecesLeft, setP2PiecesLeft ] = useState(21);
   const [ currentPlayer, setPlayer ] = useState(1);
+  const [ gameOver, setGameOver ] = useState(false);
   const [ board, setBoard ]= useState([
     [0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0],
@@ -14,7 +15,9 @@ function App() {
     [0, 0, 0, 0, 0, 0, 0],
   ])
 
-  const finishPlayersTurn = () => {
+  console.log({board})
+
+  const switchPlayers = () => {
     if (currentPlayer == 1) {
       setP1PiecesLeft(p1PiecesLeft - 1)
       setPlayer(2)
@@ -30,13 +33,15 @@ function App() {
       if(newBoard[col][row] === 0) {
         newBoard[col][row] = currentPlayer
         setBoard(newBoard)
-        finishPlayersTurn()
+        if(checkForHorizontalWin(currentPlayer) || checkForVerticalWin(currentPlayer)) {
+          setGameOver(true)
+        } else { switchPlayers() }
         return;
       }
     }
   }
 
-  const horizontalWin = (player) => {
+  const checkForHorizontalWin = (player) => {
     const ROWS = board.length
     const COLS = board[0].length
 
@@ -46,17 +51,35 @@ function App() {
           board[row][col + 1] === player &&
           board[row][col + 2] === player &&
           board[row][col + 3] === player) {
-            console.log("A horizontal win!")
             return true
           }
       }
     }
-    console.log("No horizontal win yet!")
+    return false
+  }
+
+  const checkForVerticalWin = (player) => {
+    const ROW = board.length;
+    const COL = board[0].length;
+
+    for(let col = 0; col < COL; col++) {
+      for(let row = 0; row < ROW - 3; row++) {
+        if (
+          board[row][col] === player &&
+          board[row + 1][col] === player &&
+          board[row + 2][col] === player &&
+          board[row + 3][col] === player
+          ) {
+            return true
+          }
+      }
+    }
     return false
   }
 
   return (
-    <div onMouseUp={() => horizontalWin(currentPlayer)} className='dropzone'>
+    <div className='dropzone'>
+      {gameOver ? <>Game Over, player {currentPlayer} won this round!</> : null}
       <header>Drop Zone</header>
       <button onClick={() => dropPeice(0)}>Zone 1</button>
       <button onClick={() => dropPeice(1)}>Zone 2</button>
