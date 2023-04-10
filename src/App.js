@@ -36,8 +36,27 @@ function App() {
     }
   }
 
+  const horizontalWin = (player) => {
+    const ROWS = board.length
+    const COLS = board[0].length
+
+    for(let row = 0; row < ROWS; row++) {
+      for(let col = 0; col < COLS - 3; col++) {
+        if(board[row][col] === player &&
+          board[row][col + 1] === player &&
+          board[row][col + 2] === player &&
+          board[row][col + 3] === player) {
+            console.log("A horizontal win!")
+            return true
+          }
+      }
+    }
+    console.log("No horizontal win yet!")
+    return false
+  }
+
   return (
-    <div className='dropzone'>
+    <div onMouseUp={() => horizontalWin(currentPlayer)} className='dropzone'>
       <header>Drop Zone</header>
       <button onClick={() => dropPeice(0)}>Zone 1</button>
       <button onClick={() => dropPeice(1)}>Zone 2</button>
