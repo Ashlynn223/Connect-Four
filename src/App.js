@@ -33,7 +33,7 @@ function App() {
       if(newBoard[col][row] === 0) {
         newBoard[col][row] = currentPlayer
         setBoard(newBoard)
-        if(checkForHorizontalWin(currentPlayer) || checkForVerticalWin(currentPlayer)) {
+        if(checkForHorizontalWin(currentPlayer) || checkForVerticalWin(currentPlayer) || checkForDiagonalWin(currentPlayer)) {
           setGameOver(true)
         } else { switchPlayers() }
         return;
@@ -75,6 +75,30 @@ function App() {
       }
     }
     return false
+  }
+
+  const checkForDiagonalWin = (player) => {
+    for (let row = 0; row < 3; row++) {
+      for (let col = 0; col < 4; col++) {
+        if (board[row][col] !== 0 &&
+            board[row][col] === board[row + 1][col + 1] &&
+            board[row][col] === board[row + 2][col + 2] &&
+            board[row][col] === board[row + 3][col + 3]) {
+          return true;
+        }
+      }
+    }
+    for (let row = 0; row < 3; row++) {
+      for (let col = 6; col > 2; col--) {
+        if (board[row][col] !== 0 &&
+            board[row][col] === board[row + 1][col - 1] &&
+            board[row][col] === board[row + 2][col - 2] &&
+            board[row][col] === board[row + 3][col - 3]) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
   return (
