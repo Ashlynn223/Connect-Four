@@ -1,18 +1,30 @@
 import { useState } from 'react'
 import './App.css';
 
-const Cell = ({ index }) => {
+const Cell = ({ index, board }) => {
+  console.log("cell's notion of the board:", board)
+
+  const cellColor = () => {
+    const row = Math.floor(index / 7)
+    const col = index % 7
+    console.log({index})
+    console.log("row and cell", row, col)
+   if(board[row][col] === 1) return 'green'
+   if(board[row][col] === 2) return 'pink'
+  }
+
   return(
-    <div className="cell">Cell {index}</div>
+    <div className="cell" style={{backgroundColor: cellColor()}}>Cell {index}</div>
   )
 }
 
-const Grid = () => {
+const Grid = ({ board }) => {
   const cells = [...Array(42)].map((_, index) => {
     return (
       <Cell
         key={index}
         index={index}
+        board={board}
       />
     )
   })
@@ -131,7 +143,7 @@ function App() {
         <button onClick={() => dropPeice(5)}>Zone 6</button>
         <button onClick={() => dropPeice(6)}>Zone 7</button>
       </div>
-      <Grid />
+      <Grid board={board}/>
     </>
   );
 }
