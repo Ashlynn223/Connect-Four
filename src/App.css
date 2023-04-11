@@ -1,7 +1,28 @@
+:root {
+  --cellSize: 100px;
+}
+
 .dropzone {
   background-color: blue;
   height: 200px;
   color: white;
   text-align: center;
   font-size: 40px;
+}
+
+.cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: coral;
+  height: var(--cellSize);
+  width: var(--cellSize);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-gap: 5px;
+  margin: 20px auto;
+  max-width: calc(var(--cellSize) * 7);
 }
