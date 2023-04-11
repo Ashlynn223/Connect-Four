@@ -3,6 +3,14 @@ import './App.css';
 
 const PLAYER_ONE_COLOR = 'black'
 const PLAYER_TWO_COLOR = 'lightgrey'
+const EMPTY_BOARD = [
+  [0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0],
+]
 
 const Cell = ({ index, board }) => {
 
@@ -15,7 +23,7 @@ const Cell = ({ index, board }) => {
 
   return(
     <div className="cell">
-      <div style={{borderRadius: '75px', backgroundColor: cellColor(), width: '75px', height: '75px'}}></div>
+      <div style={{ borderRadius: '75px', backgroundColor: cellColor(), width: '75px', height: '75px' }}></div>
     </div>
   )
 }
@@ -39,14 +47,7 @@ function App() {
   const [ p2PiecesLeft, setP2PiecesLeft ] = useState(21);
   const [ currentPlayer, setPlayer ] = useState(1);
   const [ gameOver, setGameOver ] = useState(false);
-  const [ board, setBoard ]= useState([
-    [0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0],
-  ])
+  const [ board, setBoard ]= useState(EMPTY_BOARD)
 
 
   const switchPlayers = () => {
@@ -135,19 +136,42 @@ function App() {
 
   return (
     <div className="main-container">
-    <div id="custom-cursor" />
-      <div className='dropzone'>
-        {gameOver ? <>Game Over, player {currentPlayer} won this round!</> : null}
-        <header>Drop Zone</header>
-        <button onClick={() => dropPeice(0)}>Zone 1</button>
-        <button onClick={() => dropPeice(1)}>Zone 2</button>
-        <button onClick={() => dropPeice(2)}>Zone 3</button>
-        <button onClick={() => dropPeice(3)}>Zone 4</button>
-        <button onClick={() => dropPeice(4)}>Zone 5</button>
-        <button onClick={() => dropPeice(5)}>Zone 6</button>
-        <button onClick={() => dropPeice(6)}>Zone 7</button>
+    {
+      gameOver ? (
+        <div className="gameOverContainer">
+          <div className="gameOverContent">
+            <header className="gameOverText">
+              Player {currentPlayer} Wins!
+            </header>
+            <button
+              className="playAgainButton"
+              onClick={() => {
+                setGameOver(false)
+                setBoard(EMPTY_BOARD)
+              }}
+            >
+              Play Again
+            </button>
+          </div>
+        </div>
+      ) : null
+    }
+      <div className="gameBoard">
+          <div id="custom-cursor" />
+          <div className='banner'>
+            <header>Drop Zone</header>
+          </div>
+          <div className="dropZone">
+            <button className="dropZoneButton" onClick={() => dropPeice(0)} />
+            <button className="dropZoneButton" onClick={() => dropPeice(1)} />
+            <button className="dropZoneButton" onClick={() => dropPeice(2)} />
+            <button className="dropZoneButton" onClick={() => dropPeice(3)} />
+            <button className="dropZoneButton" onClick={() => dropPeice(4)} />
+            <button className="dropZoneButton" onClick={() => dropPeice(5)} />
+            <button className="dropZoneButton" onClick={() => dropPeice(6)} />
+          </div>
+          <Grid board={board}/>
       </div>
-      <Grid board={board}/>
     </div>
   );
 }

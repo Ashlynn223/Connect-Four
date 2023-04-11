@@ -3,32 +3,80 @@
 }
 
 .main-container {
+  cursor: url('circle-15.svg') 45 45, auto;
   height: 100vh;
   width: 100vw;
-  cursor: url('circle-15.svg') 45 45, auto;
 }
 
-.dropzone {
+.banner {
+  align-items: center;
   background-color: blue;
-  height: 200px;
   color: white;
-  text-align: center;
+  display: flex;
   font-size: 40px;
+  height: 100px;
+  justify-content: center;
+  margin-bottom: 70px;
 }
 
 .cell {
-  display: flex;
   align-items: center;
-  justify-content: center;
   background-color: coral;
+  display: flex;
   height: var(--cellSize);
+  justify-content: center;
   width: var(--cellSize);
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  grid-gap: 5px;
-  margin: 20px auto;
+  margin: auto;
   max-width: calc(var(--cellSize) * 7);
+}
+
+.gameOverContainer {
+  background: rgba(7, 118, 166, 0.519);
+  height: 100vh;
+  position: absolute;
+  width: 100vw;
+  z-index: 1;
+}
+
+.gameOverText {
+  font-size: 50px;
+  margin-bottom: 20px;
+}
+
+.gameBoard {
+  position: relative;
+}
+
+.playAgainButton {
+  height: 20px;
+  width: 100px;
+}
+
+.gameOverContent {
+  align-items: center;
+  background-color: blue;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  height: 20vh;
+  justify-content: center;
+  width: 100vw;
+}
+
+.dropZone {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+}
+
+.dropZoneButton {
+  cursor: url('circle-15.svg') 45 45, auto;
+  height: var(--cellSize);
+  width: var(--cellSize);
 }
