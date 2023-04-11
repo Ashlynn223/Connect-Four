@@ -2,6 +2,12 @@
   --cellSize: 100px;
 }
 
+.main-container {
+  height: 100vh;
+  width: 100vw;
+  cursor: url('circle-15.svg') 45 45, auto;
+}
+
 .dropzone {
   background-color: blue;
   height: 200px;

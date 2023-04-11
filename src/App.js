@@ -1,20 +1,22 @@
 import { useState } from 'react'
 import './App.css';
 
+const PLAYER_ONE_COLOR = 'black'
+const PLAYER_TWO_COLOR = 'lightgrey'
+
 const Cell = ({ index, board }) => {
-  console.log("cell's notion of the board:", board)
 
   const cellColor = () => {
     const row = Math.floor(index / 7)
     const col = index % 7
-    console.log({index})
-    console.log("row and cell", row, col)
-   if(board[row][col] === 1) return 'green'
-   if(board[row][col] === 2) return 'pink'
+    if(board[row][col] === 1) return PLAYER_ONE_COLOR 
+    if(board[row][col] === 2) return PLAYER_TWO_COLOR
   }
 
   return(
-    <div className="cell" style={{backgroundColor: cellColor()}}>Cell {index}</div>
+    <div className="cell">
+      <div style={{borderRadius: '75px', backgroundColor: cellColor(), width: '75px', height: '75px'}}></div>
+    </div>
   )
 }
 
@@ -45,6 +47,7 @@ function App() {
     [0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0],
   ])
+
 
   const switchPlayers = () => {
     if (currentPlayer == 1) {
@@ -131,7 +134,8 @@ function App() {
   }
 
   return (
-    <>
+    <div className="main-container">
+    <div id="custom-cursor" />
       <div className='dropzone'>
         {gameOver ? <>Game Over, player {currentPlayer} won this round!</> : null}
         <header>Drop Zone</header>
@@ -144,7 +148,7 @@ function App() {
         <button onClick={() => dropPeice(6)}>Zone 7</button>
       </div>
       <Grid board={board}/>
-    </>
+    </div>
   );
 }
 
