@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import './App.css';
 
-const PLAYER_ONE_COLOR = 'black'
-const PLAYER_TWO_COLOR = 'lightgrey'
+const PLAYER_ONE_COLOR = '#d19d5a'
+const PLAYER_TWO_COLOR = '#b5b0a7'
 const EMPTY_BOARD = [
   [0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0],
@@ -136,30 +136,30 @@ function App() {
 
   return (
     <div className="main-container">
-    {
-      gameOver ? (
-        <div className="gameOverContainer">
-          <div className="gameOverContent">
-            <header className="gameOverText">
-              Player {currentPlayer} Wins!
-            </header>
-            <button
-              className="playAgainButton"
-              onClick={() => {
-                setGameOver(false)
-                setBoard(EMPTY_BOARD)
-              }}
-            >
-              Play Again
-            </button>
+      {
+        gameOver ? (
+          <div className="gameOverContainer">
+            <div className="gameOverContent">
+              <header className="gameOverText">
+                Player {currentPlayer} Wins!
+              </header>
+              <button
+                className="playAgainButton"
+                onClick={() => {
+                  setGameOver(false)
+                  setBoard(EMPTY_BOARD)
+                }}
+              >
+                Play Again
+              </button>
+            </div>
           </div>
-        </div>
-      ) : null
-    }
+        ) : null
+      }
       <div className="gameBoard">
           <div id="custom-cursor" />
           <div className='banner'>
-            <header>Drop Zone</header>
+            Player {currentPlayer}'s Turn
           </div>
           <div className="dropZone">
             <button className="dropZoneButton" onClick={() => dropPeice(0)} />
@@ -171,7 +171,7 @@ function App() {
             <button className="dropZoneButton" onClick={() => dropPeice(6)} />
           </div>
           <Grid board={board}/>
-      </div>
+        </div>
     </div>
   );
 }

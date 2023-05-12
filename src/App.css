@@ -3,14 +3,17 @@
 }
 
 .main-container {
-  cursor: url('circle-15.svg') 45 45, auto;
   height: 100vh;
   width: 100vw;
+  background-image: url('nightSky.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
 .banner {
   align-items: center;
-  background-color: blue;
+  background-color: rgba(45, 38, 119, 0.8);
   color: white;
   display: flex;
   font-size: 40px;
@@ -21,11 +24,26 @@
 
 .cell {
   align-items: center;
-  background-color: coral;
   display: flex;
   height: var(--cellSize);
   justify-content: center;
   width: var(--cellSize);
+  position: relative; width: var(--cellSize);
+  overflow: hidden;
+}
+
+.cell::before {
+  border: solid 400px rgba(39, 31, 122, 0.8);
+  border-radius: 50%;
+  content: "";
+  display: block;
+  left: 50%;
+  padding-bottom: 70%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  z-index: 2;
 }
 
 .grid {
@@ -76,7 +94,7 @@
 }
 
 .dropZoneButton {
-  cursor: url('circle-15.svg') 45 45, auto;
+  background-color: rgba(39, 31, 122, 0.8);
   height: var(--cellSize);
   width: var(--cellSize);
 }
