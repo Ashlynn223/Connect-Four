@@ -1,18 +1,9 @@
 import { useState } from 'react'
 import './App.css';
 
-const PLAYER_ONE_COLOR = '#d19d5a'
-const PLAYER_TWO_COLOR = '#b5b0a7'
-const EMPTY_BOARD = [
-  [0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0],
-]
-
 const Cell = ({ index, board }) => {
+  const PLAYER_ONE_COLOR = '#d19d5a'
+  const PLAYER_TWO_COLOR = '#b5b0a7'
 
   const cellColor = () => {
     const row = Math.floor(index / 7)
@@ -47,8 +38,15 @@ function App() {
   const [ p2PiecesLeft, setP2PiecesLeft ] = useState(21);
   const [ currentPlayer, setPlayer ] = useState(1);
   const [ gameOver, setGameOver ] = useState(false);
+  const EMPTY_BOARD = [
+    [0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0],
+  ]
   const [ board, setBoard ]= useState(EMPTY_BOARD)
-
 
   const switchPlayers = () => {
     if (currentPlayer == 1) {
